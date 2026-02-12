@@ -101,12 +101,12 @@ npm test
 #### SQL Queries
 
 SQL Data assumed to be stored in the format: 
-```json
-{customers
-  {"firstName": "Jane",
+```
+customers
+  "firstName": "Jane",
   "lastName": "Doe",
   "email": "jane.doe@example.com",
-  "created_at": "2026-02-12 18:55:53"}}
+  "created_at": "2026-02-12 18:55:53"
 ```
 
 - Write a query to retrieve the 10 most recently onboarded customers.
