@@ -119,11 +119,11 @@ customers
     FROM customers
     WHERE email LIKE '%@gmail.com';
 - Write a query that shows the number of customers created per month in 2025.
-  - SELECT 
-    DATE_FORMAT(created_at, '%Y-%m') AS month,
+  - SELECT DATE_FORMAT(created_at, '%Y-%m') AS month,
     COUNT(*) AS customer_count
     FROM customers
-    WHERE YEAR(created_at) = 2025
+    WHERE created_at >= '2025-01-01'
+    AND created_at <  '2026-01-01'
     GROUP BY month
     ORDER BY month;
 - Write a query to find all email addresses that appear more than once.
