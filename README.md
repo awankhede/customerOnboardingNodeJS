@@ -1,4 +1,4 @@
-### Assessment of customerOnboardingNodeJS
+### README
 
 #### Overview
 - Stack: Node.js, Express 5, Axios, Zod, Jest, Supertest.
@@ -19,10 +19,6 @@
     - 202 if downstream ingestion API takes >1ms 
     - 400 when required fields are missing
     - 500 when ingestion fails
-
----
-
-### README content (drop-in)
 
 #### Forbright Customer Onboarding
 A minimal Express service that accepts customer onboarding requests and forwards them to an external ingestion service.
@@ -73,6 +69,7 @@ Content-Type: application/json
 - Timeout to the ingestion service is currently 5000 ms.
 - JSON request body limit: 5 MB (configured via `express.json({ limit: '5mb' })`).
 
+
 #### Logging
 - Logs are emitted as JSON to stdout via `src/utils/logger.js` with levels `info` and `error`.
 - Example log line:
@@ -95,6 +92,7 @@ npm test
 #### Known limitations & suggested improvements
 - Externalize ingestion endpoint and timeout to environment variables (e.g., `INGESTION_URL`, `INGESTION_TIMEOUT_MS`).
 - Add request ID correlation in logs for traceability.
+- Add retry logic to handle service call timeouts
 
 #### Troubleshooting
 - `npm: command not found`: Install Node.js (which includes npm) or use a Node version manager like `nvm`.
