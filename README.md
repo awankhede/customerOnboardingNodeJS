@@ -62,7 +62,6 @@ Content-Type: application/json
 - Success: `200 OK`
 - Validation error (missing fields): `400 Bad Request`
 - Upstream failure: `500 Internal Server Error`
-```
 
 #### Configuration
 - Timeout to the ingestion service is currently 5000 ms.
