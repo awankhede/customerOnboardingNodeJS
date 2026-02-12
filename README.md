@@ -62,7 +62,6 @@ Content-Type: application/json
 - Success: `200 OK`
 - Validation error (missing fields): `400 Bad Request`
 - Upstream failure: `500 Internal Server Error`
-
 ```
 
 #### Configuration
@@ -98,3 +97,39 @@ npm test
 - `npm: command not found`: Install Node.js (which includes npm) or use a Node version manager like `nvm`.
 - Requests fail with `500`: The configured ingestion URL is a placeholder; set a reachable endpoint or mock it during local runs.
 - Getting `413 Payload Too Large`: The JSON parser is limited to 5 MB; reduce payload size or increase the limit in `src/app.js`.
+
+#### SQL Queries
+
+```json
+{customers {"firstName": "Jane",
+  "lastName": "Doe",
+  "email": "jane.doe@example.com",
+  "created_at": ""2026-02-12T18:55:53.937Z""}}
+```
+
+- Write a query to retrieve the 10 most recently onboarded customers.
+  - SELECT *
+    FROM customers
+    ORDER BY created_at DESC
+    LIMIT 10;
+- Write a query that filter all customers with emails from @gmail.com
+  - SELECT *
+    FROM customers
+    WHERE email LIKE '%@gmail.com';
+- Write a query that shows the number of customers created per month in 2025.
+  - SELECT 
+    DATE_FORMAT(created_at, '%Y-%m') AS month,
+    COUNT(*) AS customer_count
+    FROM customers
+    WHERE YEAR(created_at) = 2025
+    GROUP BY month
+    ORDER BY month;
+- Write a query to find all email addresses that appear more than once.
+  - SELECT email
+    FROM customers
+    GROUP BY email
+    HAVING COUNT(*) > 1;
+- Write a query to find all customers whose first name starts with “A”.
+  - SELECT *
+    FROM customers
+    WHERE first_name LIKE 'A%';
