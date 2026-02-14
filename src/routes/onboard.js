@@ -29,11 +29,11 @@ router.post('/onboardCustomer', async (req, res) => {
         });
     }
 
-    //If ingestion is slow, return 202 Accepted & finish ingestion in background
+    //If ingestion is slow, return 202 Accepted & finish ingestion in the background
     const ACCEPT_AFTER_MS = 1;
     const ingestionPromise = sendToIngestion(parsed.data);
     try {
-        const result = await Promise.race([
+        res = await Promise.race([
             ingestionPromise,
             new Promise((_, reject) =>
                 setTimeout(() => reject(new Error('INGESTION_PENDING')), ACCEPT_AFTER_MS)

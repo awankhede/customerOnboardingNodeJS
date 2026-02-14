@@ -5,7 +5,7 @@ const onboardingRoute = require('./routes/onboard');
 const app = express();
 const PORT = process.env.PORT || 3000
 
-// Parse JSON bodies up to 5mb
+// Parse JSON bodies up to 5 mb
 app.use(express.json({ limit: '5mb' }));
 app.use('/api', onboardingRoute);
 

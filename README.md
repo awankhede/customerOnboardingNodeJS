@@ -15,8 +15,8 @@
   - Expects JSON body with `firstName`, `lastName`, `email`.
   - Forwards body to ingestion service (`src/services/ingestionService.js`).
   - Responses:
-    - 200 on success (if procesed within 1 ms)
-    - 202 if downstream ingestion API takes >1ms 
+    - 200 on success (if processed within 1 ms)
+    - 202 if downstream ingestion API takes >1 ms
     - 400 when required fields are missing
     - 500 when ingestion fails
 
@@ -87,7 +87,7 @@ npm test
   - `500` when ingestion fails
 - Tests mock the ingestion service (`src/services/ingestionService.js`) to avoid real network calls.
 
-#### Known limitations & suggested improvements
+#### Known limitations and suggested improvements
 - Externalize ingestion endpoint and timeout to environment variables (e.g., `INGESTION_URL`, `INGESTION_TIMEOUT_MS`).
 - Add request ID correlation in logs for traceability.
 - Add retry logic to handle service call timeouts
@@ -99,7 +99,7 @@ npm test
 
 #### SQL Queries
 
-SQL Data assumed to be stored in the format: 
+SQL Data is assumed to be stored in the format: 
 ```
 customers
   firstName: Jane,
@@ -113,7 +113,7 @@ customers
     FROM customers
     ORDER BY created_at DESC
     LIMIT 10;
-- Write a query that filter all customers with emails from @gmail.com
+- Write a query that filters all customers with emails from @gmail.com
   - SELECT *
     FROM customers
     WHERE email LIKE '%@gmail.com';
@@ -122,7 +122,7 @@ customers
     COUNT(*) AS customer_count
     FROM customers
     WHERE created_at >= '2025-01-01'
-    AND created_at <  '2026-01-01'
+    AND created_at < '2026-01-01'
     GROUP BY month
     ORDER BY month;
 - Write a query to find all email addresses that appear more than once.
