@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Demo project for onboarding customers for Forbright Bank",
   "author": "Anna Zimmermann",
+  "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
     "test": "jest"

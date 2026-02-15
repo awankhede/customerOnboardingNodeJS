@@ -1,7 +1,7 @@
 jest.mock('../src/services/ingestionService', () => jest.fn());
 const sendToIngestion = require('../src/services/ingestionService');
 const request = require('supertest');
-const app = require('../src/app'); // must be AFTER jest.mock
+const app = require('../src/app');
 
 describe('App /onboard route', () => {
     const validBody = {
