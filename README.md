@@ -60,7 +60,7 @@ Content-Type: application/json
 }
 ```
 - Success (if processed within 1 ms): `200 OK`
-- Accepted (if downstream ingestion API takes >1 ms): '202 Accepted' 
+- Accepted (if downstream ingestion API takes >1 ms): `202 Accepted` 
 - Validation error (missing fields): `400 Bad Request`
 - Upstream failure: `500 Internal Server Error`
 
