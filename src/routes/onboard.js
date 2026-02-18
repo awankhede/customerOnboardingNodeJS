@@ -14,16 +14,9 @@ router.get('/healthcheck', (req, res) => {
 
 router.post('/onboardCustomer', async (req, res) => {
     logger.info('Received onboarding request');
+    const parsedObject = parseObject(req)
 
-    // Validate request body with Zod
-    const onboardSchema = z.object({
-        firstName: z.string().min(1, 'firstName is required'),
-        lastName: z.string().min(1, 'lastName is required'),
-        email: z.string().email('email must be a valid email address')
-    });
-    const parsed = onboardSchema.safeParse(req.body);
-
-    if (!parsed.success) {
+    if (!parsedObject.success) {
         logger.error('Invalid request body', parsed.error.flatten());
         return res.status(400).json({
             message: 'Invalid request body',
@@ -33,8 +26,8 @@ router.post('/onboardCustomer', async (req, res) => {
 
     //If ingestion is slow, return 202 Accepted & finish ingestion in the background
     const ACCEPT_AFTER_MS = 1;
-    const ingestionCall = sendToIngestion(parsed.data);
-    let response;
+    const ingestionCall = sendToIngestion(parsedObject.data);
+
     try {
         await Promise.race([
             ingestionCall,
@@ -62,5 +55,16 @@ router.post('/onboardCustomer', async (req, res) => {
         return res.status(500).json({message: 'Failed to send data to ingestion service'});
     }
 });
+
+
+const parseObject = (req) => {
+    // Validate request body with Zod
+    const onboardSchema = z.object({
+        firstName: z.string().min(1, 'firstName is required'),
+        lastName: z.string().min(1, 'lastName is required'),
+        email: z.string().email('email must be a valid email address')
+    });
+    return onboardSchema.safeParse(req.body);
+}
 
 module.exports = router;
