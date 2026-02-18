@@ -14,13 +14,14 @@ router.get('/healthcheck', (req, res) => {
 
 router.post('/onboardCustomer', async (req, res) => {
     logger.info('Received onboarding request');
+
     const parsedObject = parseObject(req)
 
     if (!parsedObject.success) {
-        logger.error('Invalid request body', parsed.error.flatten());
+        logger.error('Invalid request body', parsedObject.error.flatten());
         return res.status(400).json({
             message: 'Invalid request body',
-            issues: parsed.error.issues
+            issues: parsedObject.error.issues
         });
     }
 
